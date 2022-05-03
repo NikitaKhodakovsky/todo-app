@@ -5,9 +5,14 @@ import cors from 'cors'
 import express from 'express'
 import { ApolloServer } from 'apollo-server-express'
 
-import { schema, context, corsOptions } from './config'
+import { schema, context, corsOptions, dataSource } from './config'
 
 async function main() {
+	await dataSource
+		.initialize()
+		.then(() => console.log('Data Source has been initialized!'))
+		.catch((err) => console.error('Error during Data Source initialization', err))
+
 	const app = express()
 
 	app.set('trust proxy', process.env.NODE_ENV !== 'production')
