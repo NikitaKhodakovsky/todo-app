@@ -3,5 +3,6 @@ import { buildSchemaSync } from 'type-graphql'
 
 export const schema = buildSchemaSync({
 	resolvers: [FindTaskResolver, CreateTaskResolver],
-	dateScalarMode: 'isoDate'
+	dateScalarMode: 'isoDate',
+	emitSchemaFile: true
 })
