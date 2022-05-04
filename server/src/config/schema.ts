@@ -5,11 +5,19 @@ import {
 	CompleteTaskResolver,
 	CreateTaskResolver,
 	DeleteTaskResolver,
-	FindTaskResolver
-} from '../modules/task/resolvers'
+	FindAllTasksResolver,
+	FindTaskByIdResolver
+} from '../modules/task'
 
 export const schema = buildSchemaSync({
-	resolvers: [FindTaskResolver, CreateTaskResolver, CompleteTaskResolver, DeleteTaskResolver, ClearCompletedResolver],
+	resolvers: [
+		FindAllTasksResolver,
+		FindTaskByIdResolver,
+		CreateTaskResolver,
+		CompleteTaskResolver,
+		DeleteTaskResolver,
+		ClearCompletedResolver
+	],
 	dateScalarMode: 'isoDate',
 	emitSchemaFile: true
 })
