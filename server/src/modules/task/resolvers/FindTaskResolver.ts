@@ -2,12 +2,25 @@ import { Resolver, Query, Ctx, Arg, Int } from 'type-graphql'
 import { TaskNotFoundError } from '../../../common/errors'
 import { Context } from '../../../types'
 import { Task } from '../entities'
+import { Status } from '../enums'
 
 @Resolver()
 export class FindTaskResolver {
 	@Query(() => [Task])
-	async tasks(@Ctx() ctx: Context): Promise<Task[]> {
-		return ctx.taskRepository.find()
+	async tasks(
+		@Arg('status', () => Status, { defaultValue: Status.All }) status: Status,
+		@Ctx() { taskRepository }: Context
+	): Promise<Task[]> {
+		switch (status) {
+			case Status.Active:
+				return taskRepository.find({ where: { isCompleted: false } })
+
+			case Status.Completed:
+				return taskRepository.find({ where: { isCompleted: true } })
+
+			default:
+				return taskRepository.find()
+		}
 	}
 
 	@Query(() => Task)
