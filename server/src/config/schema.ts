@@ -1,13 +1,15 @@
+import { buildSchemaSync } from 'type-graphql'
+
 import {
+	ClearCompletedResolver,
 	CompleteTaskResolver,
 	CreateTaskResolver,
 	DeleteTaskResolver,
 	FindTaskResolver
 } from '../modules/task/resolvers'
-import { buildSchemaSync } from 'type-graphql'
 
 export const schema = buildSchemaSync({
-	resolvers: [FindTaskResolver, CreateTaskResolver, CompleteTaskResolver, DeleteTaskResolver],
+	resolvers: [FindTaskResolver, CreateTaskResolver, CompleteTaskResolver, DeleteTaskResolver, ClearCompletedResolver],
 	dateScalarMode: 'isoDate',
 	emitSchemaFile: true
 })
