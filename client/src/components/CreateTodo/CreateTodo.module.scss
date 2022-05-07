@@ -1,0 +1,35 @@
+@use '../../sass/abstracts' as *;
+
+.wrap {
+	@include element;
+	@include todoItemCell;
+
+	display: flex;
+	align-items: center;
+
+	padding-top: 1.4rem;
+	padding-bottom: 1.4rem;
+
+	margin-bottom: 1.6rem;
+
+	@include breakpoint-up('small') {
+		margin-bottom: 2.4rem;
+	}
+}
+
+input[type='checkbox']:checked + .input:valid {
+	text-decoration: line-through;
+}
+
+.input {
+	width: 100%;
+	background-color: transparent;
+
+	caret-color: var(--text-active);
+
+	color: var(--text-main);
+
+	&::placeholder {
+		color: var(--text-secondary);
+	}
+}

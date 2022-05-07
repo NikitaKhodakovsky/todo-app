@@ -1,0 +1,37 @@
+@use '../../sass/abstracts' as *;
+
+.wrap {
+	@include todoItemCell;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	border-bottom: 1px solid var(--divider);
+	color: var(--text-main);
+}
+
+.title {
+	margin-right: auto;
+}
+
+.closeButton {
+	background: var(--text-secondary);
+	mask: url('../../../public/icons/icon-cross.svg') no-repeat center;
+	width: 1.2rem;
+	height: 1.2rem;
+
+	@include breakpoint-up('small') {
+		width: 1.6rem;
+		height: 1.6rem;
+	}
+
+	@include breakpoint-up('medium') {
+		width: 1.8rem;
+		height: 1.8rem;
+	}
+
+	&:hover {
+		background: var(--text-main);
+	}
+}

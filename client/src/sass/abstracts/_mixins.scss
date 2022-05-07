@@ -1,0 +1,68 @@
+@use 'variables' as *;
+
+/* ------------------------------- Breakpoints ------------------------------ */
+
+@mixin breakpoint-up($size) {
+	@media (min-width: map-get($breakpoints-up, $size)) {
+		@content;
+	}
+}
+
+@mixin breakpoint-down($size) {
+	@media (max-width: map-get($breakpoints-down, $size)) {
+		@content;
+	}
+}
+
+@mixin hide-for-mobile {
+	@include breakpoint-down('medium') {
+		display: none;
+	}
+}
+
+@mixin hide-for-desktop {
+	@include breakpoint-up('large') {
+		display: none;
+	}
+}
+
+@mixin element {
+	box-shadow: var(--shadow);
+	font-size: 1.2rem;
+	background-color: var(--element-bg);
+	border-radius: var(--border-radius);
+
+	@include breakpoint-up('small') {
+		font-size: 1.4rem;
+	}
+
+	@include breakpoint-up('medium') {
+		font-size: 1.6rem;
+	}
+}
+
+@mixin todoItemCell {
+	padding: 1.6rem 2rem;
+	font-size: 1.2rem;
+
+	@include breakpoint-up('small') {
+		padding: 2rem 2.4rem;
+		font-size: 1.4rem;
+	}
+
+	@include breakpoint-up('medium') {
+		font-size: 1.8rem;
+	}
+
+	.checkbox {
+		margin-right: 1.2rem;
+
+		@include breakpoint-up('small') {
+			margin-right: 1.6rem;
+		}
+
+		@include breakpoint-up('medium') {
+			margin-right: 2.4rem;
+		}
+	}
+}

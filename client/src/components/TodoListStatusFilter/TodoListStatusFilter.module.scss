@@ -1,0 +1,32 @@
+@use '../../sass/abstracts' as *;
+
+.wrap {
+	@include element;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	padding: 1.5rem 0rem;
+	margin-bottom: 4rem;
+}
+
+.button {
+	font-size: 1.4rem;
+	font-weight: 700;
+	color: var(--text-secondary);
+	cursor: pointer;
+	margin-right: 1.8rem;
+
+	&:last-child {
+		margin-right: 0;
+	}
+
+	&:not(.active):hover {
+		color: var(--text-main);
+	}
+}
+
+.active {
+	color: var(--text-active);
+}

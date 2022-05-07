@@ -1,0 +1,22 @@
+@use '../abstracts' as *;
+
+body.dark {
+	--bg: hsl(235, 21%, 11%);
+	--element-bg: hsl(235, 24%, 19%);
+	--text-main: hsl(234, 39%, 85%);
+	--text-secondary: hsl(234, 11%, 52%);
+	--text-disabled: hsl(233, 14%, 35%);
+	--divider: hsl(237, 14%, 26%);
+
+	--shadow: none;
+
+	&::after {
+		background-image: url('../../../public/img/bg-mobile-dark.jpg');
+		background-repeat: no-repeat;
+		background-size: cover;
+
+		@include breakpoint-up('medium') {
+			background-image: url('../../../public/img/bg-desktop-dark.jpg');
+		}
+	}
+}
