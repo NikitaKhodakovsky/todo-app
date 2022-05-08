@@ -1,6 +1,7 @@
 import { buildSchemaSync } from 'type-graphql'
 
 import {
+	ActiveTasksCountResolver,
 	ClearCompletedResolver,
 	CompleteTaskResolver,
 	CreateTaskResolver,
@@ -16,7 +17,8 @@ export const schema = buildSchemaSync({
 		CreateTaskResolver,
 		CompleteTaskResolver,
 		DeleteTaskResolver,
-		ClearCompletedResolver
+		ClearCompletedResolver,
+		ActiveTasksCountResolver
 	],
 	dateScalarMode: 'isoDate',
 	emitSchemaFile: true
