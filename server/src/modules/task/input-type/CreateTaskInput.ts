@@ -4,4 +4,7 @@ import { InputType, Field } from 'type-graphql'
 export class CreateTaskInput {
 	@Field()
 	title: string
+
+	@Field({ nullable: true })
+	isCompleted: boolean
 }
