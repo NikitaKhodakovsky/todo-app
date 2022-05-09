@@ -4,15 +4,15 @@ import { Context } from '../../../types'
 import { Task } from '../entities'
 
 @Resolver()
-export class CompleteTaskResolver {
+export class ToggleTaskStatusResolver {
 	@Mutation(() => Task)
-	async completeTask(@Arg('id', () => ID) id: number, @Ctx() ctx: Context): Promise<Task> {
-		await ctx.taskRepository.update(id, { isCompleted: true })
-
+	async toggleTaskStatus(@Arg('id', () => ID) id: number, @Ctx() ctx: Context): Promise<Task> {
 		const task = await ctx.taskRepository.findOne({ where: { id } })
 
 		if (!task) throw new TaskNotFoundError()
 
-		return task
+		task.isCompleted = !task.isCompleted
+
+		return ctx.taskRepository.save(task)
 	}
 }

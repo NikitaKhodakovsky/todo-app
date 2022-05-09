@@ -3,7 +3,7 @@ import { buildSchemaSync } from 'type-graphql'
 import {
 	ActiveTasksCountResolver,
 	ClearCompletedResolver,
-	CompleteTaskResolver,
+	ToggleTaskStatusResolver,
 	CreateTaskResolver,
 	DeleteTaskResolver,
 	FindAllTasksResolver,
@@ -15,7 +15,7 @@ export const schema = buildSchemaSync({
 		FindAllTasksResolver,
 		FindTaskByIdResolver,
 		CreateTaskResolver,
-		CompleteTaskResolver,
+		ToggleTaskStatusResolver,
 		DeleteTaskResolver,
 		ClearCompletedResolver,
 		ActiveTasksCountResolver
