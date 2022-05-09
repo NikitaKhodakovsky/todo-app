@@ -1,4 +1,5 @@
 import { Resolver, Query, Ctx, Arg } from 'type-graphql'
+import { SelectQueryBuilder } from 'typeorm'
 import { Context } from '../../../types'
 import { Task } from '../entities'
 import { Status } from '../enums'
@@ -10,15 +11,18 @@ export class FindAllTasksResolver {
 		@Arg('status', () => Status, { defaultValue: Status.All }) status: Status,
 		@Ctx() { taskRepository }: Context
 	): Promise<Task[]> {
+		let builder: SelectQueryBuilder<Task> = taskRepository.createQueryBuilder('task')
+
 		switch (status) {
 			case Status.Active:
-				return taskRepository.find({ where: { isCompleted: false } })
+				builder = builder.where('task.isCompleted = :isCompleted', { isCompleted: false })
+				break
 
 			case Status.Completed:
-				return taskRepository.find({ where: { isCompleted: true } })
-
-			default:
-				return taskRepository.find()
+				builder = builder.where('task.isCompleted = :isCompleted', { isCompleted: true })
+				break
 		}
+
+		return builder.orderBy('task.createdAt', 'DESC').getMany()
 	}
 }
