@@ -1,25 +1,45 @@
-// import styles from './CreateTodo.module.scss'
-
-// import { Checkbox } from '../Checkbox'
-
-// export function CreateTodo() {
-// 	return (
-// 		<div className={styles.wrap}>
-// 			<Checkbox id='createTodo' className={styles.checkbox} />
-// 			<label htmlFor='createTodo'>Create a new todo...</label>
-// 		</div>
-// 	)
-// }
+import { useState } from 'react'
 
 import styles from './CreateTodo.module.scss'
 
 import { Checkbox } from '../Checkbox'
+import { useCreateTaskMutation } from '../../graphql/mutations'
 
 export function CreateTodo() {
+	const [title, changeTitle] = useState('')
+	const [isCompleted, changeIsCompleted] = useState(false)
+
+	const [createTask] = useCreateTaskMutation({
+		title,
+		isCompleted
+	})
+
 	return (
-		<div className={styles.wrap}>
-			<Checkbox id='createTodo' className={styles.checkbox} />
-			<input required className={styles.input} type='text' placeholder='Create new todo...' />
-		</div>
+		<form
+			className={styles.wrap}
+			onSubmit={(e) => {
+				e.preventDefault()
+
+				createTask()
+
+				changeTitle('')
+				changeIsCompleted(false)
+			}}
+		>
+			<Checkbox
+				id='createTodo'
+				className={styles.checkbox}
+				checked={isCompleted}
+				onChange={(e) => changeIsCompleted(e.target.checked)}
+			/>
+			<input
+				required
+				className={styles.input}
+				type='text'
+				placeholder='Create new todo...'
+				value={title}
+				onChange={(e) => changeTitle(e.target.value)}
+			/>
+		</form>
 	)
 }

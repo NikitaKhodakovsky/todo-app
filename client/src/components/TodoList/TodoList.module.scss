@@ -1,7 +1,10 @@
 @use '../../sass/abstracts' as *;
 
-.listWrap {
+.wrap {
 	@include element;
+
+	min-height: 10rem;
+
 	margin-bottom: 1.6rem;
 
 	@include breakpoint-up('small') {
@@ -25,9 +28,4 @@
 	button:hover {
 		color: var(--text-main);
 	}
-}
-
-.info {
-	display: flex;
-	justify-content: center;
 }

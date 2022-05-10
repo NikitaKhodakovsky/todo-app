@@ -1,18 +1,24 @@
+import { useToggleTaskStatusMutation, useDeleteTaskMutation } from '../../graphql/mutations'
 import { Checkbox } from '../Checkbox'
 import styles from './TodoListItem.module.scss'
 
 interface TodoListItemProps {
-	id: string
+	task: Task
 }
 
-export function TodoListItem({ id }: TodoListItemProps) {
+export function TodoListItem({ task }: TodoListItemProps) {
+	const [toggleStatus] = useToggleTaskStatusMutation(task.id)
+	const [deleteTask] = useDeleteTaskMutation(task.id)
+
+	const { title, isCompleted, id } = task
+
 	return (
-		<div className={styles.wrap}>
-			<Checkbox id={id} className={styles.checkbox} />
+		<li className={styles.wrap}>
+			<Checkbox id={id} className={styles.checkbox} checked={isCompleted} onChange={() => toggleStatus()} />
 			<label htmlFor={id} className={styles.title}>
-				Todo List Item
+				{title}
 			</label>
-			<button className={styles.closeButton} />
-		</div>
+			<button className={styles.closeButton} onClick={() => deleteTask()} />
+		</li>
 	)
 }

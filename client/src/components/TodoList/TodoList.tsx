@@ -1,22 +1,34 @@
 import styles from './TodoList.module.scss'
-import { TodoListItem } from '../TodoListItem'
-import { TodoListStatusFilter } from '../TodoListStatusFilter'
 
-export function TodoList() {
+import { TodoListItem } from '../TodoListItem'
+import { useGetTasksQuery } from '../../graphql/queries'
+import { useClearCompletedMutation } from '../../graphql/mutations'
+
+interface TodoListProps {
+	status: Status
+}
+
+export function TodoList({ status }: TodoListProps) {
+	const { data, loading, error } = useGetTasksQuery(status)
+	const [clearCompleted] = useClearCompletedMutation()
+
+	if (loading) return <div className={styles.wrap}>Loading...</div>
+	if (!data || error) return <div className={styles.wrap}>Error!</div>
+	if (data.tasks.length < 1) return <div className={styles.wrap}>Tasks not found</div>
+
+	const { tasks, activeTasksCount } = data
+
 	return (
 		<div className={styles.wrap}>
-			<div className={styles.listWrap}>
-				<TodoListItem id={'1'} />
-				<TodoListItem id={'2'} />
-				<TodoListItem id={'3'} />
-				<TodoListItem id={'4'} />
-				<div className={styles.bar}>
-					<div>5 items left</div>
-					<button>Clear Completed</button>
-				</div>
+			<ul>
+				{tasks.map((task) => (
+					<TodoListItem task={task} key={task.id} />
+				))}
+			</ul>
+			<div className={styles.bar}>
+				<div>{activeTasksCount} items left</div>
+				<button onClick={() => clearCompleted()}>Clear Completed</button>
 			</div>
-			<TodoListStatusFilter />
-			<div className={styles.info}>Drag and drop to reorder list</div>
 		</div>
 	)
 }
