@@ -1,0 +1,12 @@
+@use '../../sass/abstracts' as *;
+
+.toggle {
+	width: 2rem;
+	height: 2rem;
+	color: #fff;
+
+	@include breakpoint-up('small') {
+		width: 2.6rem;
+		height: 2.6rem;
+	}
+}

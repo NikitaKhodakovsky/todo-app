@@ -4,15 +4,24 @@ import ReactDOM from 'react-dom/client'
 import './sass/main.scss'
 
 import { App } from './components/App'
+import { ThemeManager, ThemeProvider } from './lib/theme'
 
 const client = new ApolloClient({
 	uri: 'http://localhost:4200/graphql',
 	cache: new InMemoryCache()
 })
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
+const manager = new ThemeManager({
+	htmlElement: document.getElementById('body') as HTMLElement
+})
+
+const rootElement = document.getElementById('root') as HTMLElement
+
+const root = ReactDOM.createRoot(rootElement)
 root.render(
-	<ApolloProvider client={client}>
-		<App />
-	</ApolloProvider>
+	<ThemeProvider manager={manager}>
+		<ApolloProvider client={client}>
+			<App />
+		</ApolloProvider>
+	</ThemeProvider>
 )
