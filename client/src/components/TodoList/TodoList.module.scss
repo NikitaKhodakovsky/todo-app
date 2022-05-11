@@ -4,11 +4,29 @@
 	@include element;
 
 	min-height: 10rem;
+	height: auto;
 
 	margin-bottom: 1.6rem;
 
 	@include breakpoint-up('small') {
 		margin-bottom: 2.4rem;
+	}
+}
+
+.messageWrap {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	width: 100%;
+
+	padding-top: 3rem;
+
+	font-size: 1.6rem;
+	color: var(--text-main);
+
+	@include breakpoint-up('small') {
+		font-size: 1.8rem;
 	}
 }
 
