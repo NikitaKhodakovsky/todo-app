@@ -1,17 +1,14 @@
-//For TypeORM CLI
-import 'dotenv/config'
+import path from 'path'
 
-import { DataSource, DataSourceOptions } from 'typeorm'
+import { DataSource } from 'typeorm'
+import { SqliteConnectionOptions } from 'typeorm/driver/sqlite/SqliteConnectionOptions'
 import { Task } from '../modules/task/entities'
 
-const dataSourceOptions = {
-	type: 'postgres',
-	host: process.env.DB_HOST || 'localhost',
-	port: process.env.DB_PORT,
-	username: process.env.DB_USERNAME,
-	password: process.env.DB_PASSWORD,
-	database: process.env.DB_DATABASE || 'postgres',
-	entities: [Task]
-} as DataSourceOptions
+const dataSourceOptions: SqliteConnectionOptions = {
+	type: 'sqlite',
+	database: path.join(process.cwd(), 'db.sqlite'),
+	entities: [Task],
+	synchronize: process.env.NODE_ENV !== 'production'
+}
 
 export const dataSource = new DataSource(dataSourceOptions)
