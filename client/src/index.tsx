@@ -15,9 +15,8 @@ const manager = new ThemeManager({
 	htmlElement: document.getElementById('body') as HTMLElement
 })
 
-const rootElement = document.getElementById('root') as HTMLElement
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
-const root = ReactDOM.createRoot(rootElement)
 root.render(
 	<ThemeProvider manager={manager}>
 		<ApolloProvider client={client}>

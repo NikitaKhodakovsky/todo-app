@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import toast from 'react-hot-toast'
 
 import styles from './CreateTodo.module.scss'
 
@@ -19,6 +20,8 @@ export function CreateTodo() {
 			className={styles.wrap}
 			onSubmit={(e) => {
 				e.preventDefault()
+
+				if (title.length < 4) return toast('Task should be longer than 4 symbols')
 
 				createTask()
 
