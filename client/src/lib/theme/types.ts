@@ -10,6 +10,9 @@ export interface ThemeManagerOptions {
 	htmlElement?: HTMLElement
 	onChange?: Subscriber
 	disablePrefersColorScheme?: boolean
+
+	customLightClass?: string
+	customDarkClass?: string
 }
 
 export interface UseThemeResult {

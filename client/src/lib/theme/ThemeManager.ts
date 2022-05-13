@@ -15,6 +15,8 @@ export class ThemeManager {
 	private keepLocalStorage: boolean = true
 
 	private htmlElement?: HTMLElement
+	private lightClass: string = 'light'
+	private darkClass: string = 'dark'
 
 	private darkMedia = window.matchMedia('(prefers-color-scheme: dark)')
 	private lightMedia = window.matchMedia('(prefers-color-scheme: light)')
@@ -27,13 +29,17 @@ export class ThemeManager {
 		onChange,
 		localStorageKey,
 		htmlElement,
-		disablePrefersColorScheme
+		disablePrefersColorScheme,
+		customDarkClass,
+		customLightClass
 	}: ThemeManagerOptions = {}) {
 		/* --------------------------- Basic configuration -------------------------- */
 
 		if (disablePrefersColorScheme === true) this.disablePrefersColorScheme = true
 		if (keepLocalStorage === false) this.keepLocalStorage = false
 		if (localStorageKey) this.localStorageKey = localStorageKey
+		if (customLightClass) this.lightClass = customLightClass
+		if (customDarkClass) this.darkClass = customDarkClass
 		if (htmlElement) this.htmlElement = htmlElement
 		if (onChange) this.subscribe(onChange)
 
@@ -67,8 +73,8 @@ export class ThemeManager {
 		this.subscribers.forEach((subscriber) => subscriber(this.getTheme()))
 
 		if (this.htmlElement) {
-			this.htmlElement.classList.remove('light', 'dark')
-			this.htmlElement.classList.add(this.getTheme())
+			this.htmlElement.classList.remove(this.darkClass, this.lightClass)
+			this.htmlElement.classList.add(this.getTheme() === 'dark' ? this.darkClass : this.lightClass)
 		}
 	}
 
