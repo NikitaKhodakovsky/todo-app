@@ -1,6 +1,6 @@
 import { Mutation, Ctx, Arg, Resolver } from 'type-graphql'
 
-import { CreateTaskInput } from '../input-type'
+import { CreateTaskInput } from '../inputs'
 import { Context } from '../../../types'
 import { Task } from '../entities'
 

@@ -6,12 +6,13 @@ import express from 'express'
 import { ApolloServer } from 'apollo-server-express'
 
 import { schema, context, corsOptions, dataSource } from './config'
+import { red } from 'ansi-colors'
 
 async function main() {
 	await dataSource
 		.initialize()
 		.then(() => console.log('Data Source has been initialized!'))
-		.catch((err) => console.error('Error during Data Source initialization', err))
+		.catch((err) => console.error(red('Error during Data Source initialization'), err))
 
 	const app = express()
 
@@ -27,7 +28,7 @@ async function main() {
 
 	await apolloServer.start()
 
-	const PORT = process.env.PORT || 4000
+	const PORT = process.env.PORT || 4200
 
 	apolloServer.applyMiddleware({ app, cors: corsOptions })
 
