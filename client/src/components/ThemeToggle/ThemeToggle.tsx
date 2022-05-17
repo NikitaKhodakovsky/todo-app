@@ -1,4 +1,5 @@
-import { useTheme } from '../../lib/theme'
+import { useTheme } from 'react-theme-lib'
+
 import styles from './ThemeToggle.module.scss'
 
 export function ThemeToggle() {

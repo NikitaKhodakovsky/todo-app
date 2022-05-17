@@ -1,10 +1,10 @@
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
+import { ThemeManager, ThemeProvider } from 'react-theme-lib'
 import ReactDOM from 'react-dom/client'
 
 import './sass/main.scss'
 
 import { App } from './components/App'
-import { ThemeManager, ThemeProvider } from './lib/theme'
 
 const client = new ApolloClient({
 	uri: 'http://localhost:4200/graphql',
