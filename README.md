@@ -32,6 +32,7 @@ Users should be able to:
 <br/>
 
 ### Screenshots
+
 ![desktop-dark](https://user-images.githubusercontent.com/52799295/168445850-4cac130f-da62-4b5c-9672-c9f424c30ea8.png)
 ![desktop-light](https://user-images.githubusercontent.com/52799295/168445871-bba79eaf-fcd7-40b4-8612-db35074cc786.png)
 ![mobile-dark](https://user-images.githubusercontent.com/52799295/168446171-9dd9721a-a282-41bd-b70e-816d70053e75.png)
@@ -45,7 +46,7 @@ Users should be able to:
     -   [React](https://reactjs.org/)
     -   [Apollo Client](https://www.apollographql.com/docs/react/)
     -   [CSS Modules](https://github.com/css-modules/css-modules)
-    -   Mobile first approach 
+    -   Mobile first approach
 
 <br/>
 
@@ -60,63 +61,44 @@ Users should be able to:
 
 ## How to run an application
 
-To run the application you need to install [NodeJS](https://nodejs.org/en/)
+To run the application you need to install [Docker](https://docs.docker.com/engine/install)
 
-After installing, you must run this command in the console to verify that the installation is correct
-
-```console
-node -v
-```
-
-The result of running this command will be the current version of NodeJS. For example:
+Then, run this command to verify that the installation is correct
 
 ```console
-v14.18.0
+docker -v
 ```
 
-After that you can start the application
-
-### Running the server
-
-Go to the root folder of the application and run the following commands
+You should see something like that:
 
 ```console
-cd ./server
-
-npm i
-
-npx tsc
-
-ORIGIN=http://localhost:3000 node ./dist/index
+Docker version 20.10.17, build 100c701
 ```
 
-You should see the following result
+Then, you need to clone this repository
 
 ```console
-Data Source has been initialized!
-Server started on port: http://localhost:4200
+git clone https://github.com/NikitaKhodakovsky/todo-app.git
 ```
 
-<br/>
-
-### Running the Client
-
-You have two options to start the client: development mode or [production mode](https://create-react-app.dev/docs/deployment). We will consider the simpler option which is development mode
-
-Make sure that your server is running. Then, open a new terminal window and go to the application root folder and run the following commands
+Navigate to directory with this repository
 
 ```console
-cd ./client
-
-npm i
-
-npm run start
+cd todo-app
 ```
- 
-After running these commands, the client will start on port 3000 by default and will be available at http://localhost:3000/
-> 📝 Note that if your client runs on a different port, you must restart the server by replacing the ORIGIN variable with the url where the client ran. 
-> 
-> For example: 
-> ```console
-> ORIGIN=http://localhost:5000 node ./dist/index
-> ```
+
+Then you need to execute this command:
+
+```console
+docker-compose --env-file ./.env.example up -d
+```
+
+The app is now available at http://localhost
+
+<br>
+
+To stop the application run:
+
+```console
+docker-compose down
+```

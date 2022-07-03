@@ -7,7 +7,7 @@ import './sass/main.scss'
 import { App } from './components/App'
 
 const client = new ApolloClient({
-	uri: 'http://localhost:4200/graphql',
+	uri: '/graphql',
 	cache: new InMemoryCache()
 })
 
